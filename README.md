@@ -52,5 +52,7 @@ As I continue learning, I will add:
 
 ## 📬 Contact
 **Yahav Eliyahu**  
+
 Computer science student
+
 **LinkedIn link** — https://www.linkedin.com/in/yahav-eliyahu-9a07a8334
