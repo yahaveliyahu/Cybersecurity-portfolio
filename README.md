@@ -1,6 +1,6 @@
 # 🛡️ Cybersecurity Learning Portfolio
 
-Welcome to my **Cyber Portfolio** - a collection of projects, labs, and hands-on exercises that I complete as I learn and practice cyber.
+Welcome to my **Cybersecurity Portfolio** - a collection of projects, labs, and hands-on exercises that I complete as I learn and practice cyber.
 
 This repository will gradually document my progress in areas such as:
 - Blue team fundamentals (log analysis, investigations)
