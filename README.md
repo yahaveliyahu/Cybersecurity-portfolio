@@ -1,4 +1,4 @@
-# 🛡️ Cyber Learning Portfolio
+# 🛡️ Cybersecurity Learning Portfolio
 
 Welcome to my **Cyber Portfolio** - a collection of projects, labs, and hands-on exercises that I complete as I learn and practice cyber.
 
