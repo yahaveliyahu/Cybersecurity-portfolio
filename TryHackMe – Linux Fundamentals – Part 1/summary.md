@@ -109,8 +109,8 @@ echo hello >> welcome
 ```
 
 This results in:
-hey
 
+hey
 hello
 
 ---
