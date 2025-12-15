@@ -1,6 +1,7 @@
 # TryHackMe – Linux Fundamentals – Part 1 (Summary)
 
 In this room, I started my journey into **Linux**!
+
 This document summarizes what I learned and practiced in the **Linux Fundamentals Part 1** room on TryHackMe.
 The room focuses on understanding the Linux operating system, working with the terminal, navigating the filesystem, and using basic shell commands and operators.
 
