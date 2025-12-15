@@ -43,8 +43,6 @@ ls
 
 This helped me understand what exists before navigating further.
 
----
-
 ### cd — Change Directory
 Used to move between directories.
 
@@ -52,8 +50,6 @@ Used to move between directories.
 cd Documents
 cd /home/ubuntu/Documents
 ```
-
----
 
 ### pwd — Print Working Directory
 Displays the full absolute path of the current directory.
@@ -65,8 +61,6 @@ pwd
 This is useful for:
 - Knowing exactly where you are in the filesystem
 - Navigating using absolute paths
-
----
 
 ### cat — View File Contents
 Outputs the contents of a file directly to the terminal.
@@ -98,8 +92,6 @@ Used to print text to the terminal or redirect it to a file.
 echo hey
 ```
 
----
-
 ### Output Redirection Operator >
 Redirects command output into a file (overwrites existing content).
 
@@ -108,8 +100,6 @@ echo hey > welcome
 ```
 
 If the file already exists, its contents are replaced.
-
----
 
 ### Append Operator >>
 Adds output to the end of a file instead of overwriting it.
@@ -136,8 +126,6 @@ find -name "*.txt"
 
 This is useful when working with large directory structures where manually browsing is inefficient.
 
----
-
 ### grep — Search File Contents
 Used to search for specific strings or patterns inside files, such as log files.
 
@@ -158,8 +146,6 @@ command1 && command2
 ```
 
 This is useful for chaining dependent commands safely.
-
----
 
 ### & — Run Command in Background
 Executes a command in the background, allowing continued use of the terminal.
