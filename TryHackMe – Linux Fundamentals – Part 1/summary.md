@@ -109,7 +109,6 @@ echo hello >> welcome
 ```
 
 This results in:
-
 hey
 
 hello
