@@ -37,7 +37,7 @@ Understanding the terminal is a fundamental skill for system administration and 
 ### ls — List Directory Contents
 Displays files and folders in the current directory.
 
-### bash
+## bash
 ls
 
 This helped me understand what exists before navigating further.
@@ -47,7 +47,8 @@ This helped me understand what exists before navigating further.
 ### cd — Change Directory
 Used to move between directories.
 
-# bash
+**bash**
+
 cd Documents
 cd /home/ubuntu/Documents
 
@@ -56,7 +57,7 @@ cd /home/ubuntu/Documents
 ### pwd — Print Working Directory
 Displays the full absolute path of the current directory.
 
-# bash
+```bash
 pwd
 
 This is useful for:
