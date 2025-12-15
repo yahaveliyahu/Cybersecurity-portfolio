@@ -48,10 +48,10 @@ This helped me understand what exists before navigating further.
 ### cd — Change Directory
 Used to move between directories.
 
-**bash**
-
+```bash
 cd Documents
 cd /home/ubuntu/Documents
+```
 
 ---
 
@@ -60,6 +60,7 @@ Displays the full absolute path of the current directory.
 
 ```bash
 pwd
+```
 
 This is useful for:
 - Knowing exactly where you are in the filesystem
@@ -70,8 +71,9 @@ This is useful for:
 ### cat — View File Contents
 Outputs the contents of a file directly to the terminal.
 
-# bash
+```bash
 cat welcome
+```
 
 ---
 
@@ -80,16 +82,18 @@ cat welcome
 ### echo Command
 Used to print text to the terminal or redirect it to a file.
 
-# bash
+```bash
 echo hey
+```
 
 ---
 
 ### Output Redirection Operator >
 Redirects command output into a file (overwrites existing content).
 
-# bash
+```bash
 echo hey > welcome
+```
 
 If the file already exists, its contents are replaced.
 
@@ -98,8 +102,9 @@ If the file already exists, its contents are replaced.
 ### Append Operator >>
 Adds output to the end of a file instead of overwriting it.
 
-# bash
+```bash
 echo hello >> welcome
+```
 
 This results in:
 hey
@@ -112,8 +117,9 @@ hello
 ### && — Conditional Command Execution
 Runs the second command only if the first command succeeds.
 
-# bash
+```bash
 command1 && command2
+```
 
 This is useful for chaining dependent commands safely.
 
@@ -122,8 +128,9 @@ This is useful for chaining dependent commands safely.
 ### & — Run Command in Background
 Executes a command in the background, allowing continued use of the terminal.
 
-# bash
+```bash
 long_running_command &
+```
 
 This is helpful when working with time-consuming processes.
 
