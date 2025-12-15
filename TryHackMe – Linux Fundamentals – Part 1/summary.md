@@ -38,6 +38,7 @@ Understanding the terminal is a fundamental skill for system administration and 
 Displays files and folders in the current directory.
 
 **bash**
+
 ls
 
 This helped me understand what exists before navigating further.
