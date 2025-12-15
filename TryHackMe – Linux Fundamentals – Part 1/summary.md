@@ -1,4 +1,4 @@
-# TryHackMe – Linux Fundamentals – Part 1 - Summary
+# TryHackMe – Linux Fundamentals – Part 1 (Summary)
 
 In this room, I started my journey into **Linux**!
 This document summarizes what I learned and practiced in the **Linux Fundamentals Part 1** room on TryHackMe.
