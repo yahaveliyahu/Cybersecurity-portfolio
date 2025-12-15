@@ -37,7 +37,7 @@ Understanding the terminal is a fundamental skill for system administration and 
 ### ls — List Directory Contents
 Displays files and folders in the current directory.
 
-## bash
+### bash
 ls
 
 This helped me understand what exists before navigating further.
