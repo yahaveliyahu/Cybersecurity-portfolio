@@ -77,6 +77,18 @@ cat welcome
 
 ---
 
+### 👤 User Identification
+
+### whoami — Current User
+Displays the username of the currently logged-in user.
+
+```bash
+whoami
+```
+This is useful when working on shared systems, remote servers, or verifying the active user context.
+
+---
+
 ### ✍️ Creating Files & Output Redirection
 
 ### echo Command
@@ -109,6 +121,30 @@ echo hello >> welcome
 This results in:
 hey
 hello
+
+---
+
+### 🔍 Searching Files and Logs
+
+### find — Locate Files
+Used to search for files by name or extension within directory trees.
+
+```bash
+find -name passwords.txt
+find -name "*.txt"
+```
+
+This is useful when working with large directory structures where manually browsing is inefficient.
+
+---
+
+### grep — Search File Contents
+Used to search for specific strings or patterns inside files, such as log files.
+
+```bash
+grep "THM*" access.log
+```
+This is especially useful for log analysis and identifying specific events or activity.
 
 ---
 
