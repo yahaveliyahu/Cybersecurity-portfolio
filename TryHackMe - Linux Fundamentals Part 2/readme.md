@@ -46,6 +46,15 @@ This part builds on the fundamentals from Part 1 and focuses on deeper interacti
 
 ---
 
+## 📸 Screenshots
+
+- Demonstrates secure SSH login to a remote Linux machine, including host key verification and user identification.
+- Shows switching between users using `su -l`, highlighting the difference between a standard user switch and a full login shell.
+- Displays hidden files using `ls -a` and explains how Linux handles configuration files.
+- Illustrates key system directories such as `/var` (logs and variable data) and `/tmp` (temporary files).
+
+---
+
 ## 🎯 Purpose
 
 This documentation demonstrates hands-on Linux experience and a solid understanding of core Linux concepts.
