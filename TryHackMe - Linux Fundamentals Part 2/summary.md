@@ -88,6 +88,8 @@ mkdir mydirectory
 Creates a new directory.
 Directories are special file types in Linux.
 
+---
+
 ## 📄 Copying, Moving, and Renaming Files
 
 ### cp — Copy Files
