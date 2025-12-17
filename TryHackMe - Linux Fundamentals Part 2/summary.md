@@ -1,8 +1,21 @@
 # TryHackMe – Linux Fundamentals Part 2 (Summary)
 
 This document summarizes what I learned and practiced in the **Linux Fundamentals Part 2** room on TryHackMe.
-This part expands on basic Linux usage and focuses on file management, permissions awareness, documentation usage, hidden files, and remote access using SSH.
 
+This part expands on basic Linux usage and focuses on:
+
+- File and directory management
+
+- Hidden files and permissions
+  
+- Switching users
+  
+- Important Linux system directories
+  
+- Using Linux documentation
+  
+- Remote access using SSH
+  
 ---
 
 ## 📁 Viewing Files and Hidden Files
@@ -29,7 +42,7 @@ This displays:
 
 - Hidden folders
 
-- Special directories such as **.** (current directory) and **..** (parent directory)
+- Special directories such as: **.** (current directory) and **..** (parent directory)
 
 Hidden files are typically **used for user and system configuration**, not for security.
 
@@ -161,9 +174,155 @@ This command inspects the actual file content to determine its type.
 
 ---
 
-## ⚙️ Important System Directories
+## 🔐 Understanding File Permissions
 
-### /etc — System Configuration
+Using the long listing format shows file permissions:
+
+```bash
+ls -l
+```
+
+Example permission string:
+
+```bash
+-rwxr-xr--
+```
+
+### Permission Structure
+- First character:
+
+- **-** regular file
+
+- **d** directory
+
+- Next three groups define permissions for:
+
+1. Owner
+
+2. Group
+
+3. Others
+
+Each group may include:
+
+r — read
+
+w — write
+
+x — execute
+
+### Permission Meanings
+- **Read** — view file contents or list directory contents
+
+- **Write** — modify files or directories
+
+- **Execute** — run a file or access a directory
+
+Permissions determine **who can access what** on a Linux system.
+
+---
+
+## 📏 Human-Readable File Sizes
+
+By default, file sizes are displayed in bytes.
+
+Using the **-h** option makes sizes easier to read:
+
+```bash
+ls -lh
+```
+
+This displays sizes using:
+
+- K (kilobytes)
+
+- M (megabytes)
+
+- G (gigabytes)
+
+---
+
+## 👥 Switching Between Users
+
+### su — Switch User
+
+```bash
+su user2
+```
+
+Switches to another user **without fully loading their environment**.
+The working directory usually remains unchanged.
+
+### su -l / --login — Full Login Shell
+
+```bash
+su -l user2
+```
+
+Simulates a real login:
+
+- Switches to the user’s home directory
+
+- Loads environment variables
+
+- Applies user-specific configuration
+
+This behavior is similar to logging in via SSH.
+
+---
+
+## 🏠 /root — Root User Home Directory
+
+Unlike regular users whose home directories are under **/home/username**,
+the **root user** has a dedicated home directory:
+
+```bash
+/root
+```
+
+Access to this directory is restricted and usually requires root privileges.
+
+---
+
+## 📦 /var — Variable Data Directory
+
+The **/var** directory stores data that changes frequently.
+
+Common contents:
+
+- **/var/log** — system and service log files
+
+- Application runtime data
+
+- Temporary operational files
+
+Log analysis often focuses heavily on **/var/log**.
+
+---
+
+## ⏳ /tmp — Temporary Directory
+
+The **/tmp** directory is used for temporary files.
+
+Key characteristics:
+
+- Writable by all users
+
+- Contents are cleared after reboot
+
+- Used for short-term data storage
+
+In penetration testing, **/tmp** is often used to store:
+
+- Enumeration scripts
+
+- Temporary tools
+
+- Payloads
+
+---
+
+## /etc — System Configuration
 
 The **/etc** directory contains system-wide configuration files.
 
@@ -217,7 +376,7 @@ SSH is the standard method for:
 
 - Linux documentation is accessed using **man** and **--help**
 
-- Files and directories are managed using simple but powerful commands
+- File permissions control access to files and directories
 
 - File extensions do not determine file type
 
@@ -234,6 +393,8 @@ These skills are essential for:
 - SOC and Blue Team work
 
 - Log analysis
+
+- Server administration
 
 - Remote system administration
 
