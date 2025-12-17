@@ -21,7 +21,7 @@ This part expands on basic Linux usage and focuses on:
 ## 📁 Viewing Files and Hidden Files
 
 ### ls — List Directory Contents
-By default, the **ls** command lists visible files and directories in the current directory.
+By default, the `ls` command lists visible files and directories in the current directory.
 
 ```bash
 ls
@@ -30,7 +30,7 @@ ls
 Hidden files are **not displayed** by default.
 
 ### ls -a / --all — Show Hidden Files
-Hidden files and directories in Linux start with a dot (**.**).
+Hidden files and directories in Linux start with a dot (`.`).
 
 ```bash
 ls -a
@@ -38,11 +38,11 @@ ls -a
 
 This displays:
 
-- Hidden configuration files (e.g. **.bashrc**, **.profile**)
+- Hidden configuration files (e.g. `.bashrc`, `.profile`)
 
 - Hidden folders
 
-- Special directories such as: **.** (current directory) and **..** (parent directory)
+- Special directories such as: `.` (current directory) and `..` (parent directory)
 
 Hidden files are typically **used for user and system configuration**, not for security.
 
@@ -51,7 +51,7 @@ Hidden files are typically **used for user and system configuration**, not for s
 ## 📘 Using Documentation in Linux
 
 ### man — Manual Pages
-Linux provides built-in documentation for almost every command using the **man** command.
+Linux provides built-in documentation for almost every command using the `man` command.
 
 ```bash
 man ls
@@ -71,7 +71,7 @@ This is the primary way professionals learn and understand commands in depth.
 
 ### --help — Quick Help
 
-Most commands also support a **--help** flag.
+Most commands also support a `--help` flag.
 
 ```bash
 ls --help
@@ -125,7 +125,7 @@ cp -R folder1 folder2
 mv note2 note3
 ```
 
-The **mv** command is used both to:
+The `mv` command is used both to:
 
 - Rename files
 
@@ -191,9 +191,9 @@ Example permission string:
 ### Permission Structure
 - First character:
 
-- **-** regular file
+- `-` regular file
 
-- **d** directory
+- `d` directory
 
 - Next three groups define permissions for:
 
@@ -205,11 +205,11 @@ Example permission string:
 
 Each group may include:
 
-- r — read
+- `r` — read
 
-- w — write
+- `w` — write
 
-- x — execute
+- `x` — execute
 
 ### Permission Meanings
 - **Read** — view file contents or list directory contents
@@ -226,7 +226,7 @@ Permissions determine **who can access what** on a Linux system.
 
 By default, file sizes are displayed in bytes.
 
-Using the **-h** option makes sizes easier to read:
+Using the `-h` option makes sizes easier to read:
 
 ```bash
 ls -lh
@@ -273,7 +273,7 @@ This behavior is similar to logging in via SSH.
 
 ## 🏠 /root — Root User Home Directory
 
-Unlike regular users whose home directories are under **/home/username**,
+Unlike regular users whose home directories are under `/home/username`,
 the **root user** has a dedicated home directory:
 
 ```bash
@@ -286,11 +286,11 @@ Access to this directory is restricted and usually requires root privileges.
 
 ## 📦 /var — Variable Data Directory
 
-The **/var** directory stores data that changes frequently.
+The `/var` directory stores data that changes frequently.
 
 Common contents:
 
-- **/var/log** — system and service log files
+- `/var/log` — system and service log files
 
 - Application runtime data
 
@@ -302,7 +302,7 @@ Log analysis often focuses heavily on **/var/log**.
 
 ## ⏳ /tmp — Temporary Directory
 
-The **/tmp** directory is used for temporary files.
+The `/tmp` directory is used for temporary files.
 
 Key characteristics:
 
@@ -312,7 +312,7 @@ Key characteristics:
 
 - Used for short-term data storage
 
-In penetration testing, **/tmp** is often used to store:
+In penetration testing, `/tmp` is often used to store:
 
 - Enumeration scripts
 
@@ -324,15 +324,15 @@ In penetration testing, **/tmp** is often used to store:
 
 ## /etc — System Configuration
 
-The **/etc** directory contains system-wide configuration files.
+The `/etc` directory contains system-wide configuration files.
 
 Notable files:
 
-- **/etc/passwd** — user accounts
+- `/etc/passwd` — user accounts
 
-- **/etc/shadow** — encrypted passwords
+- `/etc/shadow` — encrypted passwords
 
-- **/etc/sudoers** — sudo permissions
+- `/etc/sudoers` — sudo permissions
 
 This directory is critical for system security and administration.
 
@@ -374,7 +374,7 @@ SSH is the standard method for:
 
 - Hidden files are configuration files, not protected files
 
-- Linux documentation is accessed using **man** and **--help**
+- Linux documentation is accessed using `man` and `--help`
 
 - File permissions control access to files and directories
 
