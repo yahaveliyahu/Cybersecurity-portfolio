@@ -1,6 +1,6 @@
 # TryHackMe – Linux Fundamentals Part 2 (Summary)
 
-This document summarizes what I learned and practiced in the Linux Fundamentals Part 2 room on TryHackMe.
+This document summarizes what I learned and practiced in the **Linux Fundamentals Part 2** room on TryHackMe.
 This part expands on basic Linux usage and focuses on file management, permissions awareness, documentation usage, hidden files, and remote access using SSH.
 
 ---
@@ -8,16 +8,16 @@ This part expands on basic Linux usage and focuses on file management, permissio
 ## 📁 Viewing Files and Hidden Files
 
 ### ls — List Directory Contents
-By default, the ls command lists visible files and directories in the current directory.
+By default, the **ls** command lists visible files and directories in the current directory.
 
 ```bash
 ls
 ```
 
-Hidden files are not displayed by default.
+Hidden files are **not displayed** by default.
 
 ### ls -a / --all — Show Hidden Files
-Hidden files and directories in Linux start with a dot (.).
+Hidden files and directories in Linux start with a dot (**.**).
 
 ```bash
 ls -a
@@ -25,20 +25,20 @@ ls -a
 
 This displays:
 
-- Hidden configuration files (e.g. .bashrc, .profile)
+- Hidden configuration files (e.g. **.bashrc**, **.profile**)
 
 - Hidden folders
 
-- Special directories such as . (current directory) and .. (parent directory)
+- Special directories such as **.** (current directory) and **..** (parent directory)
 
-Hidden files are typically used for user and system configuration, not for security.
+Hidden files are typically **used for user and system configuration**, not for security.
 
 ---
 
 ## 📘 Using Documentation in Linux
 
 ### man — Manual Pages
-Linux provides built-in documentation for almost every command using the man command.
+Linux provides built-in documentation for almost every command using the **man** command.
 
 ```bash
 man ls
@@ -58,7 +58,7 @@ This is the primary way professionals learn and understand commands in depth.
 
 ### --help — Quick Help
 
-Most commands also support a --help flag.
+Most commands also support a **--help** flag.
 
 ```bash
 ls --help
@@ -110,7 +110,7 @@ cp -R folder1 folder2
 mv note2 note3
 ```
 
-The mv command is used both to:
+The **mv** command is used both to:
 
 - Rename files
 
@@ -163,15 +163,15 @@ This command inspects the actual file content to determine its type.
 
 ### /etc — System Configuration
 
-The /etc directory contains system-wide configuration files.
+The **/etc** directory contains system-wide configuration files.
 
 Notable files:
 
-- /etc/passwd — user accounts
+- **/etc/passwd** — user accounts
 
-- /etc/shadow — encrypted passwords
+- **/etc/shadow** — encrypted passwords
 
-- /etc/sudoers — sudo permissions
+- **/etc/sudoers** — sudo permissions
 
 This directory is critical for system security and administration.
 
@@ -213,7 +213,7 @@ SSH is the standard method for:
 
 - Hidden files are configuration files, not protected files
 
-- Linux documentation is accessed using man and --help
+- Linux documentation is accessed using **man** and **--help**
 
 - Files and directories are managed using simple but powerful commands
 
