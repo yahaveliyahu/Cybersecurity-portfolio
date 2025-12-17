@@ -205,11 +205,11 @@ Example permission string:
 
 Each group may include:
 
-r — read
+- r — read
 
-w — write
+- w — write
 
-x — execute
+- x — execute
 
 ### Permission Meanings
 - **Read** — view file contents or list directory contents
