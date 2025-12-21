@@ -252,19 +252,23 @@ Runs every 12 hours.
 ---
 
 ## 📦 Software Repositories & GPG Keys
-Linux uses repositories to distribute software.
+Linux installs software from **repositories**.
 
-When adding third-party repositories:
+For third-party software:
 
-- GPG keys verify software integrity
+- A **GPG key** is added to verify authenticity
 
-- Only trusted repositories are allowed
+- The repository is added to `/etc/apt/sources.list.d/`
 
-```bash
-add-apt-repository
-apt update
-apt install
-```
+Example flow (Sublime Text):
+
+1. Add GPG key
+
+2. Add repository
+
+3. `apt update`
+
+4. `apt install`
 
 ---
 
