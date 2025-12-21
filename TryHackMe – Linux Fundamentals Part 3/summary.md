@@ -153,25 +153,72 @@ System and service logs are stored in:
 /var/log
 ```
 
-Common logs include:
+### Important log examples
 
-- Apache: `access.log`, `error.log`
+1. **Apache**
+
+- `access.log` – records every HTTP request
+
+- `error.log` – records errors and crashes
+
+2. **Security**
+
+- `fail2ban.log` – brute-force detection
+
+- `ufw.log` – firewall activity
+
+3. **System**
 
 - `syslog`
 
-- `fail2ban.log`
+- `auth.log`
 
-- `ufw.log`
+- `dpkg.log`
 
 ### Log Rotation
 
-Older logs are:
+Logs are automatically managed:
 
-- Renamed (`.log.1`)
+- Old logs are renamed (`.log.1`)
 
-- Compressed (`.gz`)
+- Older logs are compressed (`.gz`)
 
-to prevent disk exhaustion.
+This prevents disk exhaustion and preserves history.
+
+---
+
+## 🔐 Understanding Log Permissions
+Using:
+
+```bash
+ls -l
+```
+
+Log files typically belong to:
+
+- `root`
+
+- Group `adm`
+
+This prevents unauthorized users from modifying sensitive logs.
+
+---
+
+## 📁 Hidden Files & ls -a
+
+```bash
+ls -a
+```
+
+Displays hidden files (starting with `.`), such as:
+
+- `.flag.txt`
+
+- `.bashrc`
+
+- `.ssh/`
+
+This is critical in security challenges and investigations.
 
 ---
 
