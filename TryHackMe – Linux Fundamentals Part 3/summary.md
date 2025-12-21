@@ -256,7 +256,7 @@ Linux installs software from **repositories**.
 
 For third-party software:
 
-- A **GPG key** is added to verify authenticity
+- A **GPG key** (GNU Privacy Guard key) is added to verify authenticity
 
 - The repository is added to `/etc/apt/sources.list.d/`
 
@@ -269,6 +269,22 @@ Example flow (Sublime Text):
 3. `apt update`
 
 4. `apt install`
+
+---
+
+## 🗑️ Removing Software & Repositories
+
+Remove a repository:
+
+```bash
+add-apt-repository --remove ppa:name/ppa
+```
+
+Remove a package:
+
+```bash
+apt remove package-name
+```
 
 ---
 
@@ -326,13 +342,15 @@ Advanced editor available on almost all Linux systems.
 
 - Cron automates repetitive tasks
 
-- Processes can be controlled via signals
+- Process signals control execution
+
+- Services can be managed at boot
 
 - Linux heavily relies on services and background processes
 
 - Secure software installation depends on trusted repositories
 
-- File transfer and networking tools are fundamental skills
+- File transfer tools are essential Linux skills
 
 ---
 
@@ -345,6 +363,8 @@ Understanding processes, services, logs, and scheduling is critical for:
 - Incident response
 
 - Threat hunting
+
+- Log analysis
 
 - Server hardening
 
