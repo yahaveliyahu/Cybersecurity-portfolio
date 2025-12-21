@@ -3,7 +3,7 @@
 This document summarizes what I learned and practiced in the  
 **Linux Fundamentals Part 3** room on TryHackMe.
 
-This part focuses on **processes, services, logs, scheduling, repositories, and secure file transfer**, providing insight into how Linux systems operate at runtime.
+This part focuses on process management, services, logs, scheduling, repositories, and secure file transfer. It's providing insight into how Linux systems operate at runtime and explains how a Linux system behaves after boot.
 
 ---
 
