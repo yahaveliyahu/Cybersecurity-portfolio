@@ -127,6 +127,8 @@ This part focuses on **how Linux systems actually operate behind the scenes**, i
 
 - Safely removing software and repositories
 
+---
+
 ### 🌐 Networking & File Transfer
 
 - `wget` – downloading files over HTTP/HTTPS
@@ -136,6 +138,8 @@ This part focuses on **how Linux systems actually operate behind the scenes**, i
 - `scp` – secure file transfer over SSH
 
 - `python3 -m http.server` – creating a temporary local web server
+
+---
 
 ### ✏️ Text Editing & Configuration
 
