@@ -49,7 +49,7 @@ ps
 
 ### ps aux
 
-Displays all processes on the system, including system services.
+Displays **all processes on the system**, including system services:
 
 ```bash
 ps aux
