@@ -142,6 +142,8 @@ systemctl disable apache2
 
 - `enable` – run automatically on boot
 
+Used to control web servers, databases, firewalls, etc.
+
 ---
 
 ## 📜 Logs & System Monitoring
