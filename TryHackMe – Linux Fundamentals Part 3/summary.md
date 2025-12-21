@@ -243,9 +243,11 @@ Example:
 0 */12 * * * cp -R /home/user/Documents /var/backups/
 ```
 
-Runs every 12 hours.
+- Runs every 12 hours.
 
-Wildcards (`*`) mean “any value”.
+- `*` means “any value”
+
+- `/12` means “every 12 units”
 
 ---
 
