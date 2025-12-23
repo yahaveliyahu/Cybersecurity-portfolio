@@ -206,20 +206,6 @@ This Linux documentation demonstrates:
 
 - Experience with logs, processes, services, and permissions
 
-- Skills directly relevant to:
-
-1. SOC / Blue Team roles
-
-2. Linux system administration
-
-3. Incident response
-
-4. Log analysis
-
-5. Security monitoring
-
-6. Working on real Linux servers
-
 ---
 
 ## 🛡️ How This Knowledge Applies to SOC / Blue Team Work
