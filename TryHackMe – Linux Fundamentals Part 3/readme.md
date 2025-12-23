@@ -169,27 +169,21 @@ This part focuses on **how Linux systems actually operate behind the scenes**, i
 
 ## 📸 Screenshots
 
-- Viewing running processes using `ps` and `top`
+- Apache service running and enabled (systemctl)
 
-- Managing background and foreground processes
+- Apache access logs and rotated log files
 
-- Apache access and error log analysis
+- Background and foreground process management
 
-- Inspecting `/var/log` and rotated log files
+- Cron job creation and execution verification
 
-- Creating and editing cron jobs with `crontab -e`
+- Secure file transfer using scp
 
-- Managing services using `systemctl`
+- File downloads using wget
 
-- Adding and removing software repositories
+- Python HTTP server for local file hosting
 
-- Installing third-party software using GPG verification
-
-- Transferring files securely with `scp`
-
-- Serving files using a Python HTTP server
-
-- Listing hidden configuration files with `ls -a`
+- System monitoring with top
 
 ---
 
