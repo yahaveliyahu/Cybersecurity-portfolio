@@ -45,7 +45,7 @@ This room introduces the **fundamental building blocks of computer networking**,
 | 2 | Data Link | MAC addressing and frames |
 | 1 | Physical | Signals, cables, and wireless transmission |
 
-Although the OSI model defines seven layers, real-world networking commonly follows the TCP/IP model. In this model, the OSI Presentation and Session layers are merged into the Application layer, resulting in a simplified 5 layer architecture.
+Although the OSI model defines 7 layers, real-world networking commonly follows the TCP/IP model. In this model, the OSI Presentation and Session layers are merged into the Application layer, resulting in a simplified 5 layer architecture.
 
 ---
 
