@@ -193,11 +193,11 @@ Observed behavior:
 
 - Example headers include:
 
-1. HTTP/1.1 200 OK
+1. `HTTP/1.1 200 OK`
 
-2. Content-Type: text/html
+2. `Content-Type: text/html`
 
-3. Server: lighttpd/1.4.63
+3. `Server: lighttpd/1.4.63`
 
 - The server closes the connection after sending the response
 
