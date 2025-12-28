@@ -145,7 +145,7 @@ This documentation demonstrates a strong foundation in networking concepts, whic
 
 ---
 
-## screenshots
+## 📸 screenshots
 ### TCP Connectivity Test (Port 80)
 
 First, a TCP connection test was performed using PowerShell to verify
