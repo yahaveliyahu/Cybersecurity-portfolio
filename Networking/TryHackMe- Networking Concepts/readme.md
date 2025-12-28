@@ -144,19 +144,20 @@ This documentation demonstrates a strong foundation in networking concepts, whic
 - Understanding how attacks move across the network
 
 ---
+
 ## screenshots
 ### TCP Connectivity Test (Port 80)
 
 First, a TCP connection test was performed using PowerShell to verify
 connectivity to google.com on port 80.
 
-![PowerShell TCP Test](powershell-test-netconnection-port-80.png)
+![PowerShell TCP Test](screenshots/powershell-test-netconnection-port-80.png)
 
 The connection was then analyzed at the packet level using Wireshark,
 showing the full TCP three-way handshake (SYN, SYN-ACK, ACK) and connection
 termination.
 
-![Wireshark TCP Handshake](wireshark-tcp-handshake-port-80.png)
+![Wireshark TCP Handshake](screenshots/wireshark-tcp-handshake-port-80.png)
 
 
 
