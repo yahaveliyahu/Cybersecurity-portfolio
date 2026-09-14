@@ -45,6 +45,6 @@ This documentation is part of my **cybersecurity learning portfolio** and demons
 
 ## 🔗 Related Rooms
 - Junior Security Analyst Intro
-- SOC Roles and Processes
+- SOC Fundamentals
 - (Future) Humans as Attack Vectors
 - (Future) Systems as Attack Vectors
