@@ -1,0 +1,157 @@
+# Splunk: The Basics – Summary
+
+## Overview
+In this room, I learned the fundamentals of **Splunk**, one of the leading **SIEM** solutions on the market.  
+Splunk collects, analyses, and correlates network and machine logs in real time, giving defenders better visibility into network activity and helping them detect threats faster.
+
+The room covered Splunk's core components, its interface, how data is ingested, and a hands-on exercise where I uploaded and investigated VPN logs.
+
+---
+
+## Splunk Core Components
+
+Splunk is built from three main components that work together to collect, process, and search data.
+
+### 1. Forwarder
+A lightweight agent installed on the endpoint being monitored.  
+Its job is to collect data and send it to the Splunk instance, using very few resources so it does not affect the endpoint's performance.
+
+Common data sources include:
+- Web servers generating web traffic
+- Windows machines generating Event Logs, PowerShell, and Sysmon data
+- Linux hosts generating host-centric logs
+- Databases generating connection requests, responses, and errors
+
+---
+
+### 2. Indexer
+The Indexer processes the data it receives from forwarders.
+
+It:
+- Parses and normalises the data into **field-value pairs**
+- Categorises the data
+- Stores the results as **events**, ready to be searched and analysed
+
+---
+
+### 3. Search Head
+The Search Head is where users search the indexed logs, inside the **Search & Reporting** app.
+
+- Searches are written in **SPL (Search Processing Language)**
+- The request is sent to the Indexer, and matching events are returned as field-value pairs
+- Results can be turned into tables and visualisations such as pie, bar, and column charts
+
+**Data flow:** Forwarder → Indexer → Search Head
+
+---
+
+## Navigating the Splunk Interface
+
+The Splunk home screen is divided into four main sections:
+
+- **Splunk Bar** – The top panel, with Messages (system notifications), Settings (instance configuration), Activity (progress of search jobs), Help (tutorials and documentation), and Find (search across the app). It also allows switching between installed apps.
+- **Apps Panel** – Shows the apps installed on the instance. The default app in every installation is **Search & Reporting**.
+- **Explore Splunk** – Quick links to add data, add new apps, and access the Splunk documentation.
+- **Home Dashboard** – Empty by default. Dashboards can be selected from existing ones or created, and personally created dashboards appear under the **Yours** tab.
+
+---
+
+## Data Ingestion
+
+Splunk can ingest almost any type of data. Incoming data is processed and transformed into a series of individual events.
+
+### Data Source Categories
+- **Files and directories** – The source of most interesting data
+- **Network events** – Data from any network port and SNMP events from remote devices
+- **IT Operations** – e.g. Nagios, NetApp, Cisco
+- **Cloud services** – e.g. AWS, Kinesis
+- **Database services** – e.g. Oracle, MySQL, Microsoft SQL Server
+- **Security services** – e.g. McAfee, Active Directory, Symantec Endpoint Protection
+- **Virtualisation services** – e.g. VMware, XenApp
+- **Application servers** – e.g. JMX & JMS, WebLogic, WebSphere
+- **Windows sources** – Event Log, Registry, WMI, Active Directory, Performance monitoring
+- **Other sources** – FIFO queues, scripted inputs for pulling data from APIs, and other remote interfaces
+
+### Ingestion Methods (Add Data page)
+- **Upload** – One-time upload of files from the local machine
+- **Monitor** – Continuous collection from files and ports on the Splunk instance (Files, HTTP, WMI, TCP/UDP, Scripts)
+- **Forward** – Receive data from a Splunk Universal Forwarder
+
+### The Five Upload Steps
+1. **Select Source** – Choose the log file
+2. **Set Source Type** – Define the log format (e.g. JSON, syslog)
+3. **Input Settings** – Set the hostname and the index where the logs will be stored
+4. **Review** – Check all configurations
+5. **Done** – Data is uploaded and ready for analysis
+
+---
+
+## Practical: Investigating VPN Logs
+
+I uploaded a newline-delimited JSON file of VPN logs using the **Upload** option, kept the `_json` source type detected by Splunk, and created a new index called `VPN_Logs`.
+
+Each event contained fields such as:
+- `UserName`, `Source_ip`, `Source_Country`, `source_state`
+- `action` (`built` / `teardown` – connection opened or closed)
+- `port` (443), `protocol` (tcp), `EventTime`
+
+### Things I Learned Along the Way
+- The **time picker** must be set to **All time** – otherwise older logs won't appear in the results
+- Splunk index names are stored in lowercase (`vpn_logs`), but searches on the index name are case-insensitive
+- `| spath` tells Splunk to parse JSON fields from each event
+- `| stats` transforms raw events into summarised results in the **Statistics** tab
+
+### SPL Queries and Findings
+
+**Total events in the log file:**
+```splunk
+index=VPN_Logs
+| stats count
+```
+Result: **2,862 events**
+
+**Events generated by a specific user:**
+```splunk
+index=VPN_Logs
+| spath
+| search UserName="Maleena"
+| stats count
+```
+Result: **60 events**
+
+**User associated with a specific IP address:**
+```splunk
+index=VPN_Logs
+| spath
+| search Source_ip="107.14.182.38"
+| stats values(UserName) as UserName count
+```
+Result: **Smith** (26 events)
+
+**Events not originating from France:**
+```splunk
+index=VPN_Logs
+| spath
+| search Source_Country!="France"
+| stats count
+```
+Result: **2,814 events**
+
+**Events from a specific IP address:**
+```splunk
+index=VPN_Logs
+| spath
+| search Source_ip="107.3.206.58"
+| stats count
+```
+Result: **14 events**
+
+---
+
+## Key Takeaways
+- Splunk is a powerful SIEM for collecting, searching, and correlating machine data
+- Its architecture is built on three components: Forwarder, Indexer, and Search Head
+- Splunk can ingest data from almost any source and normalises it into searchable events
+- Indexes keep data organised and separated
+- SPL makes it possible to filter, count, and correlate events quickly – for example, linking IP addresses to users or spotting activity from unexpected countries
+- Hands-on log analysis is a core SOC skill, and Splunk is one of the main tools used for it
