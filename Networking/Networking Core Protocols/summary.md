@@ -227,6 +227,62 @@ The server's `CAPABILITY` list (like `STARTTLS`, `AUTH=PLAIN`, `IDLE`) shows wha
 
 ---
 
+## 8. Hands-On Traffic Analysis with Wireshark
+To see these protocols for myself, I captured my own traffic on the AttackBox while repeating the HTTP, FTP and POP3 exercises.
+
+### Capturing Traffic
+- Started Wireshark and chose the capture interface. **`ens5`** is the AttackBox's main network interface, the one that connects to the TryHackMe network and the target machine
+- Other interfaces had traffic too: `lo` (loopback, traffic the machine sends to itself), `veth*` and `docker0` (Docker containers), and `any` (all interfaces combined)
+- `ip route get <IP>` shows which interface traffic to a destination will use
+
+### Filtering the Noise
+The capture contained a lot of unrelated traffic, such as requests to **169.254.169.254** (the AWS instance metadata service, queried automatically by the AttackBox) and the remote desktop connection on port 8443.
+
+Display filters isolated my own traffic:
+- `http && ip.addr == <MACHINE_IP>`
+- `ftp` – the FTP control connection
+- `pop` – the POP3 connections
+
+### Follow Stream
+- **Follow TCP Stream** shows the raw bytes exactly as they crossed the network
+- **Follow HTTP Stream** decodes HTTP first, such as decompressing gzip and joining chunked transfers
+
+### HTTP Capture
+The stream showed my `GET /flag.html` request and the full response, including the HTML with the hidden flag in a `div` styled to be invisible on the page.
+
+### FTP Capture – A Different Client, Different Commands
+My `ftp` client sent different protocol commands from the client used in the room, for the same actions against the same server:
+
+| Command | Purpose |
+|---|---|
+| `FEAT` | Asks the server which extensions it supports |
+| `EPSV` | Extended Passive Mode, used instead of `PASV`; returns only the port and supports IPv6 |
+| `TYPE I` | Binary mode (`I` = Image) |
+| `SIZE` | Gets the file size before downloading, used for the progress bar |
+| `MDTM` | Gets the file's last modification time, to preserve it locally |
+
+The server answers only what the client asks. The protocol defines which commands exist, and the client software decides which ones to send.
+
+### FTP Data Connections
+Each transfer appeared as a separate one-way TCP stream from the server:
+- One stream carried the **directory listing** (the response to `LIST`)
+- Another carried the **contents of `flag.txt`** (the response to `RETR`)
+
+This confirmed that file contents never appear in the control connection, and that they travel in cleartext as well.
+
+### POP3 Capture – Credentials in Cleartext
+I filtered the POP3 session with `pop` and followed the TCP stream.
+
+The stream showed the whole session, from the `Dovecot (Ubuntu)` greeting to `QUIT`:
+- `USER linda` – the username, in cleartext
+- `PASS <password>` – **the password, fully readable in the capture** (blurred in my screenshot)
+- `LIST` – the messages in the mailbox and their sizes
+- `RETR` – the full retrieved message, including the server-added `Received` header with the sender's real IP address
+
+This was the clearest demonstration of the room's main lesson: anyone capturing this traffic gets both the username and the password, and can log in to the mailbox themselves. POP3S (port 995) encrypts the session and prevents this.
+
+---
+
 ## Status Codes Across Protocols
 HTTP, FTP, and SMTP use three-digit codes, where the **first digit** indicates the type of response:
 
