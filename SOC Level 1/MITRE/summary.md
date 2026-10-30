@@ -223,28 +223,37 @@ D3FEND connects defensive techniques to ATT&CK techniques that affect the same a
 
 ## Other MITRE Projects
 
-### Adversary Emulation Library
-- A free library of **emulation plans**, maintained by the **Center for Threat-Informed Defense (CTID)**
-- **Full emulation plans** – Emulate a specific group from initial access to exfiltration (e.g. FIN6)
-- **Micro emulation plans** – Emulate a small set of behaviours common to many groups (e.g. webshells)
-- Each plan includes an intelligence summary mapped to ATT&CK and a step-by-step guide
+### Adversary Emulation Library 
+- What it is: A library of emulation plans hosted on GitHub by MITRE’s Center for Threat-Informed Defense. These plans are based on known adversary behaviors and are designed to allow Red Teams to manually emulate a specific threat group, enabling the testing of defenses from the perspective of the threat.
+There are two types:
+1. Full Emulation: A comprehensive emulation of a specific group, covering the entire lifecycle from initial intrusion to data exfiltration.
+2. Micro Emulation: A focused emulation of behaviors common to multiple groups. These plans cover a small number of specific techniques.
+- What each plan contains: An intelligence summary of the group (who they target, how, and why) and the scope of their activity. All information is sourced from public data and mapped to the ATT&CK framework, followed by a detailed, step-by-step scenario.
 
 ### Caldera
-- An open-source platform for **automated adversary emulation**, built on ATT&CK
-- It uses a C2 server and agents to run techniques on systems in a controlled environment
-- It helps test detections, train blue teams and support red team exercises
-- It should be run only in secure, isolated environments
+- What it is: A free, open-source security platform built on the ATT&CK framework, designed to automate adversary emulation, assist manual Red Teams, and facilitate automated incident response.
+- How it works: It consists of two components: a core system—featuring an asynchronous C2 server with a REST API and a web interface—and plugins that extend its functionality, such as agents, reports, and collections of TTPs. In essence, you deploy an agent on machines within your network, and the server sends it commands that emulate ATT&CK techniques. It follows the same structure as a C2 server, but is used for legitimate purposes.
+- Primary use: The team creates a profile of a specific adversary and executes it within the network to identify the organization's vulnerabilities. This helps test defenses and train Blue Teams to detect specific threats.
+- It should be run only in secure and isolated environments, because Caldera is actually a genuine offensive tool. This has three implications:
+1. The server controls the computers on which the agents are installed. Caldera is structured exactly like an attacker's infrastructure: it features a Command and Control (C2) server, with agents installed on network machines that execute any command sent by the server. If a real-world attacker were to compromise the Caldera server, they would gain immediate access to a fully operational C2 server already connected to all those machines.
+2. Caldera’s own security mechanisms are not robust enough to be relied upon.
+MITRE itself states this: Caldera is a research and testing tool, not a product designed to withstand actual attacks.
+3. The techniques it executes are real.
+Caldera does not merely "simulate" actions; it actually carries out the commands—such as extracting passwords from memory, creating scheduled tasks, or exfiltrating files.
 
 ### AADAPT
 - **Adversarial Actions in Digital Asset Payment Technologies**
-- A new knowledge base with its own matrix, covering threats to blockchain networks, smart contracts, digital wallets and other digital asset technologies
-- Follows a structure similar to ATT&CK. IDs start with `ADT` (e.g. `ADT3025` – Scrape Blockchain Data)
+- What it is: A comprehensive knowledge base of attacker tactics and techniques targeting digital asset management systems, derived from real-world attacks, observations, and vulnerabilities. It is structured according to the ATT&CK model, and its tactics and techniques complement those found in ATT&CK.
+- Useful detail: Techniques marked with an ampersand (&) indicate an overlap with ATT&CK.
+SOCRadar
+- Identifiers: Begin with `ADT`, such as `ADT3025` – Blockchain data scraping.
 
 ### ATLAS
 - **Adversarial Threat Landscape for Artificial-Intelligence Systems**
-- A knowledge base and matrix of threats to AI and machine learning systems, including real-world case studies
-- IDs start with `AML` (e.g. `AML.T0068` – LLM Prompt Obfuscation, under the **Defense Evasion** tactic)
-- Example: hiding prompt injections using invisible text or encodings such as base64, to avoid guardrails and human review
+- What it is: A knowledge base of attacker tactics, techniques, and case studies targeting AI and machine learning systems.
+- What makes it unique: It includes techniques not found in the ATT&CK framework.
+- Case studies: Real-world attacks mapped to specific techniques. For example, in `AML.CS0046`, researchers embedded a prompt injection into a PDF file; when a user asked "Claude Computer Use" to work with that file, the malicious instruction was triggered.
+- Identifiers: They begin with the prefix `AML`: `AML.T` for techniques, `AML.TA` for tactics, and `AML.CS` for case studies.
 
 ---
 
