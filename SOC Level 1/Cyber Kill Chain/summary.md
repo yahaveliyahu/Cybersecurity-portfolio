@@ -32,31 +32,44 @@ Examples / techniques:
 
 Recon / OSINT tools:
 - theHarvester – command-line tool (Kali) that gathers emails, names, subdomains, IPs, and URLs from many public sources (mostly passive)
-- Hunter.io – web service focused on a domain's email addresses and the organisation's email format (e.g. '{first}.{last}@')
+- Hunter.io – web service focused on a domain's email addresses and the organisation's email format (e.g. `{first}.{last}@`)
 - OSINT Framework – a web directory of OSINT tools organised by category
 - Shodan – a search engine for internet-connected **devices and services** (open ports, software versions, IoT, exposed databases, ICS/SCADA). Passive: it already scanned the internet, so querying it leaves no trace on the target
 
 Countermeasures:
-- Minimise public information on websites, social media, and DNS records
-- Use WHOIS privacy services
+- Minimise public information on websites, social media, and DNS records (and do OSINT on yourself to see what's exposed)
+- Use WHOIS privacy services 
 - Monitor network traffic and logs to detect scanning activity
 
 ---
 
 ### 2. Weaponisation
-Based on the information gathered, the attacker builds a payload tailored to the target's weaknesses. At the end of this stage, a deliverable malicious file is ready.
+Based on the information gathered, the attacker turns raw intel into an attack tool — crafting malware/exploits into a payload tailored to the target's weaknesses. At the end of this stage, a deliverable malicious file is ready.
 
-Examples:
+Key terminology:
+- Malware – software designed to damage, disrupt, or gain unauthorised access to a computer
+- Exploit – a program/code that takes advantage of a vulnerability or flaw
+- Payload – the malicious code the attacker runs on the system
+
+Where the "weapon" comes from: attackers use automated tools, buy ready-made payloads on the Dark Web, or (for sophisticated / nation-sponsored APTs) write custom malware to be unique and evade detection.
+
+Examples / tactics:
 - Compiling a malicious program
 - Using, editing, or creating exploit code
 - Exploit kits – automated platforms containing many ready-made exploits
 - Microsoft Office documents with malicious macros
+- Setting up C2 infrastructure in advance
+- Embedding a backdoor to bypass security mechanisms
+- Tailoring phishing templates or OAuth-consent apps to look legitimate
 - Obfuscation or encryption to evade detection
+
+OAuth – a protocol that lets an app get limited access to your account on another service without your password (e.g. "Sign in with Google"). In a consent phishing attack, the attacker builds a malicious app with a legitimate-looking name; the victim approves it on a real Google/Microsoft consent screen, and the attacker's app receives an access token. Dangerous because no password is stolen (so changing it doesn't help) and MFA doesn't block it.
 
 Countermeasures:
 - Continuous user security awareness training
 - Disabling unnecessary features, software, and browser plugins
 - Disabling macros or allowing only signed and trusted ones (enforced via Windows Group Policy)
+- Restricting who can approve third-party OAuth apps
 
 ---
 
