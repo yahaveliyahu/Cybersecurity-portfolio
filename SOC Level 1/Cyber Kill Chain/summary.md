@@ -4,7 +4,9 @@
 In this room, I learned about the **Cyber Kill Chain**, a cyber security framework introduced by **Lockheed Martin in 2011** and inspired by military kill chains.  
 The framework breaks a cyber attack into **seven stages**, helping organisations understand how attacks are conducted and where they can be stopped.
 
-The core idea: if defenders can detect and block the attacker at **any** stage, the chain is broken and the attack fails. The most damage happens in the final stage, so stopping the attack earlier is always better.
+The core idea: if defenders can detect and block the attacker at **any** stage, the chain is broken and the attack fails. To succeed, an adversary must pass through **all** phases, so the earlier the chain is broken, the less damage is done — the most damage happens in the final stage.
+
+Why it matters: understanding the Kill Chain helps defend against ransomware, security breaches, and **APTs** (Advanced Persistent Threats), and helps identify missing security controls. It is especially useful for roles such as **SOC Analyst, Security Researcher, Threat Hunter, and Incident Responder**, who need to recognise intrusion attempts and understand the attacker's goals.
 
 ---
 
@@ -17,13 +19,22 @@ There are two types:
 - **Passive reconnaissance** – No direct interaction with the target, so it makes no "noise" (OSINT)
 - **Active reconnaissance** – Requires interacting with the target, so it can be detected
 
-Examples:
+**OSINT (Open-Source Intelligence)** – gathering insight from publicly available information. Public sources include: search engines, print/online media, social media, forums and blogs, public record databases, and WHOIS/technical data.
+
+Examples / techniques:
 - WHOIS lookups (domain owners, contact info, registration dates)
 - DNS queries (revealing DNS servers and public IP addresses)
 - Google Dorking – using advanced search operators to find exposed sensitive files
 - Social media and website reconnaissance
+- Email harvesting – obtaining email addresses from public/paid/free services, used to launch phishing attacks
 - Port scanning and vulnerability scanning (active)
 - Physical reconnaissance of the target's premises (active)
+
+Recon / OSINT tools:
+- theHarvester – command-line tool (Kali) that gathers emails, names, subdomains, IPs, and URLs from many public sources (mostly passive)
+- Hunter.io – web service focused on a domain's email addresses and the organisation's email format (e.g. '{first}.{last}@')
+- OSINT Framework – a web directory of OSINT tools organised by category
+- Shodan – a search engine for internet-connected **devices and services** (open ports, software versions, IoT, exposed databases, ICS/SCADA). Passive: it already scanned the internet, so querying it leaves no trace on the target
 
 Countermeasures:
 - Minimise public information on websites, social media, and DNS records
