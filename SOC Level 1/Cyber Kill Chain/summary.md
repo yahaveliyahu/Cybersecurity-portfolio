@@ -83,7 +83,10 @@ Examples:
 - Malvertising – malicious ads on legitimate websites
 - **Smishing** – SMS phishing with malicious links
 - Social engineering
-- Physical delivery via USB drives or DVDs
+- **USB drops** – leaving infected USB drives in public places, or mailing them to a company with its logo while posing as a customer. Exploits curiosity/trust
+- **Watering hole attacks** – compromising a website the target group frequently visits
+
+Drive-by download – malware downloaded without the user's knowledge, just from visiting a page — either by exploiting a browser/plugin flaw automatically, or by tricking the user (e.g. a fake "update your browser" pop-up). Watering hole is how victims are brought to the page; drive-by download is what happens to them there.
 
 Countermeasures:
 - User training on phishing, social engineering, and safe browsing
@@ -94,14 +97,18 @@ Countermeasures:
 ---
 
 ### 4. Exploitation
-The payload exploits a weakness in the target system to gain access.
+The attacker's code executes on the target, taking advantage of a weakness, to gain access.
 
 Examples:
+- Malicious macro execution (e.g. delivered via phishing, runs ransomware on open)
 - Logging in with default or weak credentials
 - Stealing passwords through phishing
 - Exploiting software vulnerabilities in public-facing applications
 - SQL injection and buffer overflow
 - **Zero-day exploits** – exploits used before the vendor is even aware the vulnerability exists, so no patch is available
+- **Known CVEs** – exploiting unpatched, publicly documented vulnerabilities
+
+CVE (Common Vulnerabilities and Exposures) – a unique ID for a known vulnerability (e.g. CVE-2021-44228 = Log4Shell), managed by MITRE. Each usually has a CVSS severity score (0–10). A CVE is known (usually patched); a zero-day is unknown (no patch). Publishing a CVE helps defenders patch but also tells attackers what to target — a race between patching and exploitation (e.g. WannaCry exploited EternalBlue (Cyber attack tool) months after a fix existed).
 
 Countermeasures:
 - Enforcing strong password requirements
@@ -128,7 +135,7 @@ Defence: CSRF tokens, which a malicious site cannot know.
 ---
 
 ### 5. Installation
-The attacker ensures **persistence**, so they can return to the system later without exploiting it again. The keyword of this stage is **persistence**.
+The attacker ensures **persistence**, so they can return to the system later without exploiting it again. The keyword of this stage is **persistence**. A **backdoor** (also called an access point) is a hidden way back in that bypasses normal authentication; a **persistent backdoor** survives reboots.
 
 Examples:
 - Scheduled tasks in Windows or cron jobs in Linux
@@ -136,8 +143,17 @@ Examples:
 - Installing a new Windows service or Linux daemon (Software that runs in the background on a Linux system—continuously, without being opened by a user, and without a window or interface. It typically starts automatically when the computer powers on and waits to perform its function)
 - Adding a local user account
 - Installing malware, rootkits (Malicious software whose primary objective is to remain hidden. It grants the attacker access at the highest privilege level (root), while simultaneously concealing itself and the attacker's activities from the operating system and security tools), or **backdoors** – hidden ways into the system that bypass normal authentication
-- Using LOLBins (Living-Off-the-Land Binaries) – legitimate built-in system tools
-- **Web shells** – small scripts on a compromised web server that let the attacker run OS commands through a browser, hidden inside normal HTTPS traffic
+- Using LOLBins (Living-Off-the-Land Binaries) – legitimate built-in system tools (e.g. PowerShell, certutil, sc.exe, reg) abused by attackers, so they blend in and leave no new files
+- Web shells – small scripts planted on a compromised web server that let the attacker run OS commands through a browser, hidden inside normal HTTPS traffic
+- Registry Run Keys - These are keys in the Registry where any entries listed are automatically executed upon logon.
+- Masquerading – giving the malicious file/service a legitimate-looking name
+- Timestomping – modifying a file's timestamps so it looks old/legitimate
+
+Key tools & concepts:
+- Metasploit – the best-known penetration-testing framework (comes with Kali). A huge library of ready-made exploits and payloads.
+- Meterpreter – Metasploit's advanced in-memory payload that gives the attacker an interactive remote shell (list processes, screenshots, keylogging, file transfer).
+- metsvc is a persistent backdoor from Metasploit that installs Meterpreter as a Windows service on the victim's machine. Essentially, it is the tool that transforms temporary Meterpreter access into persistent access that survives a system reboot.
+- DLL injection – forcing a legitimate running process to load a malicious DLL (a shared code library in Windows). The code then runs inside the legitimate process, with its permissions and under its name — good for evasion.
 
 Countermeasures:
 - Monitoring new processes and services, including their parent processes
