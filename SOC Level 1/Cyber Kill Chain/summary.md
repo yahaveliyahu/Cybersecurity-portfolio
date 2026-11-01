@@ -172,7 +172,9 @@ Examples:
 - DNS tunnelling – hiding data inside DNS requests
 - Social media platforms and legitimate cloud services (Dropbox, Google Docs)
 - **DGA (Domain Generation Algorithms)** – generating thousands of domains, of which only a few are registered
-- **Fast Flux** – A single domain is linked to hundreds or thousands of IP addresses, and the addresses change every few minutes.
+- **Fast Flux** – A single domain is linked to hundreds or thousands of IP addresses, and the addresses change every few minutes (compromised devices act as proxies in front of the hidden C2 server).
+
+DGA swaps the domain; Fast Flux keeps the domain and swaps the IP addresses — both make takedown harder.
 
 Countermeasures:
 - Network monitoring with firewalls, IDS, and IPS
@@ -189,6 +191,7 @@ The attacker carries out their original goal.
 Examples:
 - **Data exfiltration** – stealing sensitive files (common in espionage)
 - **Ransomware** – encrypting files and demanding payment for the decryption key
+- Deleting backups and shadow copies (Shadow Copy = a Microsoft technology that creates backup copies/snapshots of files or volumes) — done so victims can't restore
 - Destructive attacks – deleting or corrupting data
 - Financial theft through fraudulent transfers
 - Keylogging to capture passwords and sensitive input
@@ -204,7 +207,7 @@ Countermeasures:
 
 ---
 
-## Practical Exercise
+## Practical Exercise 1
 The room included a drag-and-drop exercise where I matched attacker actions to their stages:
 
 | Action | Stage |
@@ -225,6 +228,19 @@ A helpful way to classify each action is to ask: **"What is the attacker trying 
 - Stay in → Installation
 - Control remotely → C2
 - Achieve the goal → Actions on Objectives
+
+---
+## Practical Exercise 2
+The exercise maps the attack onto the Kill Chain using MITRE ATT&CK techniques — notably, the icons were shown with no stage names and out of order, forcing identification by meaning, not position.
+
+| Stage | 	Item (MITRE technique) | Why | 
+|---|---|---|
+| Exploitation | powershell | Running code on the system |
+| Delivery | spearphishing attachment | transmit the malicious attachment sent to a supplier (Fazio Mechanical) to steal its access |
+| Weaponization | exploit public-facing application | The exploit against Target’s internet-facing supplier portal is the weapon prepared to breach the internal network |
+| Installation | dynamic linker hijacking | Loading a malicious library in place of a legitimate one — persistence (akin to DLL injection) |
+| Command and Control | fallback channels | Backup C2 channels used if the primary is blocked |
+| Actions on Objectives | data from local system | Collecting the card data from POS systems — the final goal |
 
 ---
 
