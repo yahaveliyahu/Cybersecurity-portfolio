@@ -244,6 +244,14 @@ The exercise maps the attack onto the Kill Chain using MITRE ATT&CK techniques �
 
 ---
 
+Limitations of the Cyber Kill Chain
+The model is useful but not sufficient on its own:
+- **Not updated** since its 2011 release, creating security gaps
+- Designed for **perimeter defence and malware**, but modern adversaries combine many **TTPs** (Tactics, Techniques, Procedures) and can defeat threat intelligence by changing file hashes and IP addresses (security vendors now use AI to detect subtle changes)
+- Cannot identify **Insider Threats** — per CISA, the potential for an insider to use their authorised access to harm the organisation
+
+**Recommendation**: don't rely on the traditional Cyber Kill Chain alone; also use **MITRE ATT&CK** and the **Unified Kill Chain** for a more comprehensive defence.
+
 ## Red Team vs. Blue Team Perspective
 - **Blue Team** – Detects and blocks attacker actions at each stage to break the chain
 - **Red Team / Penetration Testers** – Follow the same stages as real adversaries to simulate realistic attacks and test whether existing security controls work
@@ -256,4 +264,5 @@ The exercise maps the attack onto the Kill Chain using MITRE ATT&CK techniques �
 - The earlier the attack is stopped, the less damage is done
 - Each stage has its own attacker techniques and matching defences
 - Persistence (Installation) and covert communication (C2) let attackers stay hidden for long periods
+- The same action can map to different stages depending on intent — ask "what is the attacker trying to achieve?"
 - Defence relies on layered controls: user training, MFA, patching, monitoring, EDR, segmentation, and least privilege
