@@ -18,13 +18,13 @@ The room introduces the **Cyber Kill Chain**, a framework that breaks a cyber at
   - Command and Control (C2)
   - Actions on Objectives
 - Attack techniques at each stage, such as:
-  - OSINT, Google Dorking, and port scanning
-  - Malicious macros and exploit kits
-  - Phishing, spear phishing, and smishing
-  - Zero-day exploits, SQL injection, XSS, and CSRF
-  - Persistence via cron jobs, services/daemons, backdoors, rootkits, and web shells
-  - C2 evasion techniques: DNS tunnelling, DGA, and Fast Flux
-  - Data exfiltration, ransomware, lateral movement, and ICS manipulation
+  - **Reconnaissance** - OSINT, Google Dorking, and port scanning
+  - **Weaponisation** - Malicious macros and exploit kits
+  - **Delivery** - Phishing, spear phishing (Targeted Phishing), smishing, USB drops, watering hole attacks and drive-by downloads
+  - **Exploitation** - Zero-day exploits, known CVEs, SQL injection, XSS, and CSRF
+  - **Installation** - Persistence via cron jobs, services/daemons, Windows services via sc.exe & Reg, Registry Run Keys / Startup Folder, backdoors and persistent backdoors (Metasploit / Meterpreter / metsvc), DLL injection, rootkits, web shells, LOLBins, masquerading and timestomping
+  - **Command and Control** - C2 evasion techniques: DNS tunnelling, DGA, and Fast Flux
+  - **Actions on Objectives** - credential theft, privilege escalation, data exfiltration, ransomware, deleting backups/shadow copies, lateral movement, and ICS manipulation
 - Countermeasures for each stage, such as:
   - MFA and patch management
   - WAF, IDS/IPS, and EDR
@@ -38,7 +38,8 @@ The room introduces the **Cyber Kill Chain**, a framework that breaks a cyber at
 
 ## 📂 Contents
 
-- **summary.md** – A detailed summary of the seven stages, attack examples, countermeasures, and the stage-mapping exercise.
+- **summary.md** – A detailed summary of the seven stages, attack examples, countermeasures, and the stage-mapping exercises and the Target breach analysis.
+- **screenshots/** – Supporting screenshot demonstrating  the Practical Exercises (no flags or sensitive data included).
   
 ---
 
@@ -55,5 +56,5 @@ This documentation is part of my **cybersecurity learning portfolio** and demons
 ## 🔗 Related Rooms
 - Defensive Security Intro
 - Offensive Security Intro
+- MITRE ATT&CK
 - (Future) Unified Kill Chain
-- (Future) MITRE ATT&CK
