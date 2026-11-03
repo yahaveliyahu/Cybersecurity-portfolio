@@ -218,8 +218,8 @@ On-Premises means that the servers are located at your company and you are respo
 In every model, the customer stays responsible for their **data** and **who can access it**.
 
 The Pizza Analogy
-
 A common analogy that helps with remembering:
+
 On-Premises: Making a pizza at home from scratch. You buy the flour, prepare the dough, and use your own oven.
 IaaS: Renting a fully equipped kitchen. The oven and the kitchen belong to someone else, but you prepare the pizza yourself.
 PaaS: Ordering a delivery of pre-made dough and toppings. You simply assemble and bake it.
