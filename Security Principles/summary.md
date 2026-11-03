@@ -170,36 +170,36 @@ Example: a web server runs old software with a publicly known flaw, attackers ar
 ## Shared Responsibility Model (Cloud)
 These are the three primary cloud service models. The difference between them lies in how much of the system the provider manages for you, versus how much remains your responsibility.
 
-The Foundation: What a System Is Built Of
-Every computing system is composed of layers, from the bottom up:
-**Hardware and Data Center:** Servers, power, cooling, and physical security.
-**Network and Virtualization:** Connectivity, and the layer that partitions a physical server into multiple virtual machines.
-**Operating System:** Linux, Windows.
-**Runtime:** The environment that executes the code—such as a JVM for Java or a Python interpreter.
-**Application:** The code itself.
+The Foundation: What a System Is Built Of\
+Every computing system is composed of layers, from the bottom up:\
+**Hardware and Data Center:** Servers, power, cooling, and physical security.\
+**Network and Virtualization:** Connectivity, and the layer that partitions a physical server into multiple virtual machines.\
+**Operating System:** Linux, Windows.\
+**Runtime:** The environment that executes the code—such as a JVM for Java or a Python interpreter.\
+**Application:** The code itself.\
 **Data:** The information stored by the application.
 
 As you move through the models from IaaS -> PaaS -> SaaS, the provider takes on more layers, leaving you with fewer responsibilities.
 
 ### IaaS – Infrastructure as a Service
-**What you get:** A "blank" virtual machine in the cloud. The provider supplies the hardware, networking, and virtualization; everything else is up to you.
-**What you do:** Choose an operating system, install updates, install software, configure the firewall, and deploy your code and data.
-**Example:** Azure Virtual Machines
-**When it’s suitable:** When you need full control—for instance, to install specialized software or configure the server exactly the way you want.
+**What you get:** A "blank" virtual machine in the cloud. The provider supplies the hardware, networking, and virtualization; everything else is up to you.\
+**What you do:** Choose an operating system, install updates, install software, configure the firewall, and deploy your code and data.\
+**Example:** Azure Virtual Machines\
+**When it’s suitable:** When you need full control—for instance, to install specialized software or configure the server exactly the way you want.\
 **Regarding security:** A significant amount of responsibility rests with you. If you fail to update the operating system and it contains a known vulnerability, that becomes your problem.
 
 ### PaaS – Platform as a Service
-**What you get:** A ready-to-use platform for running code. The provider also manages the operating system and the runtime environment.
-**What you do:** You write the code, upload it, configure the application settings, and manage the data. You do not interact with the server itself.
-**Example:** Azure App Service
-**When it’s suitable:** When you want to focus solely on the code. For instance, if you have a Python backend server and simply want it to run—without having to manage a Linux server.
+**What you get:** A ready-to-use platform for running code. The provider also manages the operating system and the runtime environment.\
+**What you do:** You write the code, upload it, configure the application settings, and manage the data. You do not interact with the server itself.\
+**Example:** Azure App Service\
+**When it’s suitable:** When you want to focus solely on the code. For instance, if you have a Python backend server and simply want it to run—without having to manage a Linux server.\
 **Regarding security:** The provider handles operating system updates. You are responsible for ensuring your code is secure, configurations are correct, and data is protected.
 
 ### SaaS – Software as a Service
-**What you get:** Software ready for use via a web browser or an application. There is no need for installation or management.
-**What you do:** You simply use the software and manage who has access to it.
-**Examples:** Microsoft 365, Gmail, Google Drive, Zoom.
-**When it’s suitable:** When you need a ready-made solution and do not want to develop or maintain anything yourself.
+**What you get:** Software ready for use via a web browser or an application. There is no need for installation or management.\
+**What you do:** You simply use the software and manage who has access to it.\
+**Examples:** Microsoft 365, Gmail, Google Drive, Zoom.\
+**When it’s suitable:** When you need a ready-made solution and do not want to develop or maintain anything yourself.\
 **Regarding security:** The provider is responsible for almost everything—but not everything. If a user chooses a weak password, fails to enable two-factor authentication, or accidentally shares a sensitive file publicly, that remains your responsibility.
 
 Comparison of Responsibilities
