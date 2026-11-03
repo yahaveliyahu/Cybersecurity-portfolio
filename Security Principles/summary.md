@@ -214,6 +214,7 @@ Comparison of Responsibilities
 | **Data and Access** | You | You | You | You |
 
 On-Premises means that the servers are located at your company and you are responsible for everything.
+
 In every model, the customer stays responsible for their **data** and **who can access it**.
 
 The Pizza Analogy
