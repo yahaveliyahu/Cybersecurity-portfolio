@@ -46,5 +46,4 @@ This documentation is part of my **cybersecurity learning portfolio** and demons
 - Identity and Access Management
 - (Future) Application Design Flaws
 - (Future) Logging for Accountability
-
-- (Future) Application Design Flaws
+- 
