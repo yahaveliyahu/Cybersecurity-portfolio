@@ -31,10 +31,10 @@ Weaknesses in any of these let attackers access other users' data or gain privil
 ---
 
 ## A01: Broken Access Control
-**What it is:**\
+### What it is:
 Access control (authorization) determines what each user is permitted to do and see. "Broken" means the server fails to properly enforce these permissions for every request.
 
-**The problem:**\
+### The problem:
 The server places too much trust in the client—it assumes that if you have sent a request for a specific resource, you are authorized to access it, without independently verifying that the resource actually belongs to you.
 
 ### The vulnerability being exploited:
@@ -64,10 +64,10 @@ Since the IDOR here only let me view other normal users' accounts (same privileg
 ---
 
 ## A07: Authentication Failures
-**What it is:**\
+### What it is:
 Authentication is the stage where a user proves their identity (e.g., via password, OTP, or passkey). A failure here means the application is unable to reliably verify the identity or correctly link it to the appropriate account.
 
-**The problem:**\
+### The problem:
 Logical flaws in the registration or login process, or weak management of identities and sessions, can allow an attacker to log in as another user. Common issues include username enumeration, weak passwords without account lockout or rate-limiting, and insecure handling of sessions or cookies.
 
 ### The exploited vulnerability
@@ -88,15 +88,15 @@ This occurred because the password verification and the account lookup were two 
 ---
 
 ## A09: Logging & Alerting Failures
-**What it is:**\
+### What it is:
 when an app doesn't record or alert on security-relevant events, defenders can't detect or investigate attacks. Good logging underpins **accountability**.\
 **Accountability** — the ability to prove who did what, when, and from where. This relies on logging and alerting regarding security-relevant events.
 
-**The problem:**\
+### The problem:
 When an application fails to log or alert on significant events, defenders cannot detect or investigate an attack. Common failures include: a lack of logging for authentication events, vague logs, no alerts for brute-force attempts or permission changes, insufficient log retention periods, or logs stored in a location accessible to an attacker for modification.
 
-The exploited vulnerability
-### The investigation (SIEM dashboard)
+### The exploited vulnerability
+**The investigation (SIEM dashboard)**\
 The SIEM dashboard for `bank.thm` summarised the activity:
 - **Total Logs:** 40
 - **Suspicious Activity:** 7
