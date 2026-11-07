@@ -70,7 +70,7 @@ Authentication is the stage where a user proves their identity (e.g., via passwo
 ### The problem:
 Logical flaws in the registration or login process, or weak management of identities and sessions, can allow an attacker to log in as another user. Common issues include username enumeration, weak passwords without account lockout or rate-limiting, and insecure handling of sessions or cookies.
 
-### The exploited vulnerability
+### The exploited vulnerability:
 **A logical flaw involving case-sensitivity:**
 We registered using the username `aDmiN` (mixed case). The registration process checked for uniqueness in a case-sensitive manner—treating it as a new,
 distinct username—whereas the login process searched for the account in a case-insensitive manner.
@@ -79,7 +79,7 @@ This occurred because the password verification and the account lookup were two 
 
 **Key insight I learned:** I never had to discover the admin's password. By registering a look-alike username, I created my *own* credentials that the app then wrongly bound to the admin identity — a "side door" in.
 
-### How to fix it
+### How to fix it:
 - **Normalise** usernames to one canonical form (e.g., lowercase) **before both** the registration uniqueness check and the login lookup, so `admin`, `aDmiN`, and `ADMIN` collapse to one identity
 - Enforce a **unique index** on that canonical form
 - Rate-limit / lock out repeated login attempts (to defend against brute-force attacks).
@@ -95,7 +95,7 @@ when an app doesn't record or alert on security-relevant events, defenders can't
 ### The problem:
 When an application fails to log or alert on significant events, defenders cannot detect or investigate an attack. Common failures include: a lack of logging for authentication events, vague logs, no alerts for brute-force attempts or permission changes, insufficient log retention periods, or logs stored in a location accessible to an attacker for modification.
 
-### The exploited vulnerability
+### The exploited vulnerability:
 **The investigation (SIEM dashboard)**\
 The SIEM dashboard for `bank.thm` summarised the activity:
 - **Total Logs:** 40
@@ -117,7 +117,7 @@ The attacker tried to **access a restricted admin area**, reaching the endpoint 
 **What `/supersecretadminstuff` means:** an admin-only "door." Its very name shows the problem — hiding a sensitive area behind a hard-to-guess name is **security through obscurity**, not real security. Once the name is known or guessed, nothing stops access. Real protection must be a **server-side authorisation check on every request**.
 **Why each log field matters:** the endpoint tells us *what* was targeted, the IP *where from*, the username *who*, the timestamp *when*, and the response code whether it was an *attempt or a breach*. Remove the Request URL and you'd only know "a successful GET happened" — never that the admin area was exposed. That gap is exactly the "insufficient logging" failure.
 
-### How to fix it
+### How to fix it:
 - Log the full authentication lifecycle: failures, successes, password/2FA/role changes, and admin actions
 - Centralise logs **off-host** with proper retention, so an attacker can't tamper with them
 - Alert on anomalies — brute-force bursts, privilege elevation, access to sensitive endpoints
