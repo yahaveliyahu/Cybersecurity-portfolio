@@ -21,11 +21,44 @@ I will update this repository as I complete additional rooms, labs, and mini-pro
 ## 📘 Completed Projects & Labs
 
 ### ✔ TryHackMe Labs
-Below are the labs I have documented so far:
+Below are the labs I have documented so far, grouped by topic:
 
-- **Offensive Security Intro**  
-  Folder: `tryhackme-offensive-security-intro/`  
-  Summary of what I learned, screenshots, and notes about directory enumeration.
+**🔵 SOC & Security Operations**
+- SOC Fundamentals — `SOC Fundamentals/`
+- Junior Security Analyst Intro — `SOC Level 1/Junior Security Analyst Intro/`
+- SOC Role in Blue Team — `SOC Level 1/SOC Role in Blue Team/`
+- Introduction to SIEM — `SOC Level 1/Introduction to SIEM/`
+- Splunk: The Basics — `SOC Level 1/Splunk: The Basics/`
+- Introduction to EDR — `SOC Level 1/Introduction to EDR/`
+- Intro to Logs — `Intro to Logs/`
+- Windows Event Logs — `Windows Event Logs/`
+
+**🎯 Threats & Attack Frameworks**
+- MITRE — `SOC Level 1/MITRE/`
+- Cyber Kill Chain — `SOC Level 1/Cyber Kill Chain/`
+- Humans as Attack Vectors — `SOC Level 1/Humans as Attack Vectors/`
+- Systems as Attack Vectors — `SOC Level 1/Systems as Attack Vectors/`
+
+**🛡️ Security Foundations**
+- Defensive Security Intro — `Tryhackme-Defensive-Security-Intro/`
+- Offensive Security Intro — `tryhackme-offensive-security-intro/` (directory enumeration)
+- Security Principles — `Security Principles/`
+- Identity and Access Management — `Identity and Access Management/`
+
+**🌐 Web Security**
+- OWASP Top 10 2025: IAAA Failures — `OWASP Top 10/`
+
+**📡 Networking**
+- Networking Concepts — `Networking/`
+- Networking Essentials — `Networking/`
+- Networking Core Protocols — `Networking/`
+
+**🪟 Windows & Active Directory**
+- Windows Fundamentals 1–3 — `Windows/`
+- Active Directory Basics — `Active Directory Basics/`
+
+**🐧 Linux**
+- Linux Fundamentals Parts 1–3 — `linux/`
 
 (Additional labs will be added here as I complete and document them.)
 
@@ -53,6 +86,6 @@ As I continue learning, I will add:
 ## 📬 Contact
 **Yahav Eliyahu**  
 
-Computer science student
+B.Sc. Computer Science graduate
 
 **LinkedIn link** — https://www.linkedin.com/in/yahav-eliyahu-9a07a8334
