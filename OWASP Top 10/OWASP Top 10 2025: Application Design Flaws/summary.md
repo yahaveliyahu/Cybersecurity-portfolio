@@ -6,14 +6,14 @@ The focus was on failures that are *built into* how an application is configured
 
 Each category came with a hands-on challenge on a vulnerable web app, which I solved from the command line (mainly `curl`, plus `openssl`, `gobuster`, and `ffuf`).
 The categories covered:
-1. **AS02** – Security Misconfigurations
-2. **AS03** – Software Supply Chain Failures
-3. **AS04** – Cryptographic Failures
-4. **AS06** – Insecure Design
+1. **A02** – Security Misconfigurations
+2. **A03** – Software Supply Chain Failures
+3. **A04** – Cryptographic Failures
+4. **A06** – Insecure Design
 
 ---
 
-## AS02 – Security Misconfigurations
+## A02 – Security Misconfigurations
 
 ### What it is
 Misconfigurations happen when systems, servers, or applications are deployed with **unsafe defaults, incomplete settings, or exposed services**. These are not code bugs but mistakes in how the environment is set up. A single open admin panel, exposed storage bucket, or over-permissive setting can compromise the whole system.
@@ -37,7 +37,7 @@ The hint — "developers left too many traces" — pointed at **stack traces** (
 
 ---
 
-## AS03 – Software Supply Chain Failures
+## A03 – Software Supply Chain Failures
 
 ### What it is
 Supply chain failures happen when an app relies on **components, libraries, services, or models** that are compromised, outdated, or unverified. The weakness isn't in your own code — it's in what you **depend on**. One bad dependency can compromise the whole system.
@@ -60,7 +60,7 @@ The hint named an outdated `lib/vulnerable_utils.py`. The room provided the **so
 
 ---
 
-## AS04 – Cryptographic Failures
+## A04 – Cryptographic Failures
 
 ### What it is
 Cryptographic failures happen when encryption is used **incorrectly or not at all** — weak algorithms, hard-coded keys, poor key handling, or sensitive data left unencrypted. The result: data that should be private becomes accessible.
@@ -88,7 +88,7 @@ Cryptographic failures happen when encryption is used **incorrectly or not at al
 
 ---
 
-## AS06 – Insecure Design
+## A06 – Insecure Design
 
 ### What it is
 Insecure design means flawed logic or architecture is built into the system **from the start** — skipped threat modelling, no design reviews, or wrong assumptions about how the system will be used. **You can't patch an insecure design**; fixing it means rethinking the system's **trust boundaries**.
