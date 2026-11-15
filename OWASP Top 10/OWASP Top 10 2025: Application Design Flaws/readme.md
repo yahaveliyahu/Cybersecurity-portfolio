@@ -9,10 +9,10 @@ The room covers four OWASP Top 10 2025 categories that share one root cause: **w
 ## 🛡️ Topics Covered
 
 - The four design-related OWASP Top 10 2025 categories:
-  - **AS02** – Security Misconfigurations
-  - **AS03** – Software Supply Chain Failures
-  - **AS04** – Cryptographic Failures
-  - **AS06** – Insecure Design
+  - **A02** – Security Misconfigurations
+  - **A03** – Software Supply Chain Failures
+  - **A04** – Cryptographic Failures
+  - **A06** – Insecure Design
 - How the OWASP Top 10 ranking works (prevalence + impact, not pure severity)
 - Core concepts explored along the way:
   - AWS S3, buckets, and public vs private storage
