@@ -185,14 +185,9 @@ The file disappears from its original location, so the user cannot open it by mi
 Quarantining the original file is not enough.
 
 ### Infected Host Timeline
-
-<img src="screenshots/infected host timeline.png" width="1000" alt="timeline">
-
 The investigation of Host-HKNV (user: Smith) showed the process tree of the attack:
 
-`explorer.exe` → `chrome.exe` → File Downloaded → `Payslip.pdf` → executed:
-- `Powershell.exe`
-- Malicious DNS Query
+<img src="screenshots/infected host timeline.png" width="1000" alt="timeline">
 
 What each step means:
 1. **explorer.exe** – The Windows interface process (desktop, taskbar, Start menu). Almost every program the user opens is launched from it. A normal starting point.
