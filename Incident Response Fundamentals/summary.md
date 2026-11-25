@@ -186,7 +186,7 @@ Quarantining the original file is not enough.
 
 ### Infected Host Timeline
 
-![Infected host timeline](screenshots/infected host timeline.png)
+<img src="screenshots/infected host timeline.png" width="260" alt="Login">
 
 The investigation of Host-HKNV (user: Smith) showed the process tree of the attack:
 
