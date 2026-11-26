@@ -37,12 +37,14 @@ A saved .evtx file can be moved to another computer and analysed there – usefu
 
 ---
 
-## Log Categories
+## Windows Log Types
+Windows stores its logs in separate log files, each dedicated to a specific category:
+
 | Log | What it records |
 |---|---|
-| **System** | Operating system events – drivers, hardware changes, services |
+| **System** | Operating system events – drivers, hardware changes, system startup, services, etc |
 | **Security** | Logon/logoff and other security events, based on the audit policy |
-| **Application** | Events from installed applications – errors, warnings, information |
+| **Application** | Events from installed applications – errors, warnings, compatibility issues, etc |
 | **Directory Service** | Active Directory changes, mainly on Domain Controllers |
 | **File Replication Service** | Sharing of Group Policies and logon scripts between Domain Controllers |
 | **DNS** | Domain events on DNS servers |
@@ -78,6 +80,72 @@ The audit types describe **who tried to access what, and whether it worked** –
 
 ## Event Viewer
 
+Unlike log files that have no built-in viewer, Windows includes **Event Viewer** – a graphical tool for viewing and searching logs.
+
+### Overview and Summary Page
+When Event Viewer opens, the main page shows:
+- **Summary of Administrative Events** – How many events of each level (Critical, Error, Warning, Information, Audit Success) occurred in the last hour, 24 hours and 7 days
+- **Recently Viewed Nodes** – Logs I opened recently
+- **Log Summary** – Each log's size, last modification time, whether it is enabled, and its **retention policy** (for example, *Overwrite events as needed* – when the log reaches its maximum size, the oldest events are deleted to make room for new ones)
+
+### The Three Panes
+- **The Left Pane (Log Tree)**
+  - **Custom Views** – Saved filters
+  - **Windows Logs** – The main logs: Application, Security, etc
+  - **Applications and Services Logs** – Logs of specific applications and Windows components
+  - **Saved Logs** – Log files that were opened from disk
+  - **Subscriptions** – Collecting events from other computers
+- **Middle pane (Event list)** – All events in the selected log, with columns: Keywords, Date and Time, Source, Event ID, Task Category. Below it, a preview pane shows the details of the selected event
+- **Right pane (Actions)** – Options for analysing the log: Filter Current Log, Find, Save, Create Custom View, Clear Filter, etc.
+
+### Event Details
+Double-clicking an event opens **Event Properties**, which has two tabs:
+- **General** tab – rendered, human-readable data
+- **Details** tab – **Friendly View** (tree) or **XML View** (the raw event structure)
+
+When reading an event, the key fields are **who, where, when and what**: User, Computer, Logged, and the event content.
+
+Main fields:
+- **Description** – Detailed information about the activity (for example, "An account was successfully logged on")
+- **Log Name** – The log file the event belongs to (e.g. Security)
+- **Source** – The component that wrote the event (e.g. Microsoft Windows security auditing)
+- **Event ID** – A unique identifier for a specific type of activity
+- **Logged** – When the activity occurred
+- **Level** – The event type (Information, Warning, Error...)
+- **Task Category** – The activity category (e.g. Logon, Logoff, User Account Management)
+- **Keywords** – For Security events: **Audit Success** or **Audit Failure**
+- **Computer** – The machine on which the event occurred
+
+**Important:** Event IDs are **not unique**. Event ID 4103 means "Executing Pipeline" in the PowerShell log, but can mean something completely different for another provider.  
+What identifies an event is the combination of **Provider + Event ID**.
+
+### Subject vs. Target
+Many security events record two accounts:
+- **Subject** – *Who* performed the action
+- **New Account / Target Account** – *Who the action was performed on*
+
+Fields inside these sections:
+- **Security ID (SID)** – The account's unique identifier; Windows tracks accounts by SID, not by name
+- **Account Name** – The account's name
+- **Account Domain** – The computer or domain the account belongs to
+- **Logon ID** – Identifies the logon session in which the action happened. The same Logon ID in different events means the actions were performed in the **same session** – this lets me connect events together
+
+### Log Properties
+Right-click a log → **Properties** shows its location, size, and creation/modification dates.  
+It also shows the **maximum log size** and what happens when it is reached – this is called **log rotation**:
+- Overwrite events as needed (oldest first) – **Circular**
+- Archive the log when full
+- Do not overwrite events
+
+The **Clear Log** button has legitimate uses, but adversaries use it to cover their tracks.
+
+### Useful Actions
+- **Open Saved Log** – open an .evtx file (used in this room with `merged.evtx`)
+- **Filter Current Log** – temporary filter on the current log only
+  **Tip:** Filtering several IDs together (e.g. `4720,4722,4724`) shows related actions in one chronological list, which makes it easier to follow an attacker's sequence of actions.
+- **Create Custom View** – saved filter that can cover multiple logs
+- **Connect to Another Computer** – right-click *Event Viewer (Local)*
+
 ### MMC and Snap-ins
 Event Viewer is a **Microsoft Management Console (MMC) snap-in**.  
 MMC is an empty framework for management tools – each **snap-in** adds a management tool to it. A `.msc` file is a saved console with snap-ins already loaded.
@@ -92,54 +160,66 @@ Common snap-ins:
 | Group Policy Editor | `gpedit.msc` |
 | Computer Management | `compmgmt.msc` |
 
-### The Three Panes
-- **Left pane** – hierarchical tree of logs and providers
-- **Middle pane** – list of events and details of the selected event
-- **Right pane** – Actions
+---
 
-### Event Columns
-| Column | Meaning |
-|---|---|
-| **Level** | The event type (Information, Warning, Error...) |
-| **Date and Time** | When the event was logged |
-| **Source** | The software (provider) that logged the event |
-| **Event ID** | A number that maps to a specific operation **for that source** |
-| **Task Category** | The event category, defined by the source |
+## Hands-on Investigation
 
-**Important:** Event IDs are **not unique**. Event ID 4103 means "Executing Pipeline" in the PowerShell log, but can mean something completely different for another provider.  
-What identifies an event is the combination of **Provider + Event ID**.
+### Scenario
+A critical organisation was attacked, and data was exfiltrated from a file server. The security team identified the compromised system that had access to the file server.  
+My task was to find out what the attacker did on this compromised system before accessing the file server.
 
-### Event Details
-- **General** tab – rendered, human-readable data
-- **Details** tab – **Friendly View** (tree) or **XML View** (the raw event structure)
+### Investigation Steps
+1. **Account creation (4720)** – Filtering the Security log on 4720 returned 3 events, all on 6/7/2024 (12:55:56 PM, 12:56:07 PM, 12:56:27 PM).  
+   Sorting by time and opening the newest event, I found the last created account under **New Account → Account Name**: **`hacked`**.
+2. **Who created it** – Under **Subject → Account Name** I found the account that performed the creation: **`Administrator`** (Logon ID `0x7333A`).
+3. **Account enabled (4722)** – Filtering on 4722 and matching **Target Account → Account Name** to `hacked`, I found when the account was enabled.
+4. **Password reset (4724)** – Filtering on 4724 showed an event at 6/7/2024 12:56:27 PM with **Target Account: `hacked`**, performed by **Administrator** in the same session (same Logon ID `0x7333A`). So the account's password was reset.
 
-When reading an event, the key fields are **who, where, when and what**: User, Computer, Logged, and the event content.
+### What This Means
+This sequence is a typical **persistence** technique – the attacker creates a backdoor account to keep access to the system:
+- **Create** the account (4720)
+- **Enable** it (4722)
+- **Set a password** they control (4724)
 
-### Log Properties
-Right-click a log → **Properties** shows its location, size, and creation/modification dates.  
-It also shows the **maximum log size** and what happens when it is reached – this is called **log rotation**:
-- Overwrite events as needed (oldest first) – **Circular**
-- Archive the log when full
-- Do not overwrite events
+The matching Logon ID across the events showed that all these actions were done in the same Administrator session, which helps build the attacker's timeline.
 
-The **Clear Log** button has legitimate uses, but adversaries use it to cover their tracks.
+---
 
-### Useful Actions
-- **Open Saved Log** – open an .evtx file (used in this room with `merged.evtx`)
-- **Filter Current Log** – temporary filter on the current log only
-- **Create Custom View** – saved filter that can cover multiple logs
-- **Connect to Another Computer** – right-click *Event Viewer (Local)*
-
-| | Filter Current Log | Create Custom View |
-|---|---|---|
-| Saved? | No | Yes, under Custom Views |
-| Multiple logs? | No | Yes |
-| By log / By source | Greyed out | Available |
-
-The "By log / By source" options are greyed out in Filter Current Log because the filter only applies to the current log.
-
-In the filter window, Event IDs can be included or excluded:  
-`4103,4104` (list), `5-99` (range), `-76` (exclude).
+## Key Event IDs
+| Event ID | Log | Meaning | When did he register? |  
+|---|---|---|---|
+| 104 | System | A log was cleared | When a log other than Security (for example System or Application) is cleared, via the Clear Log button in Event Viewer or with wevtutil cl |
+| 2004 | Firewall | rule added | rule was added |
+| 2005 | Firewall | rule changed | rule was changed |
+| 2006 | Firewall | rule deleted | One rule was deleted. The event displays the name of the deleted rule, so it is clear exactly what was removed |
+| 2033 | Firewall | all rules were deleted | All rules were deleted from the firewall settings at once. This happens, for example, when resetting the firewall to its default settings |
+| 400 | PowerShell | PowerShell engine started (check EngineVersion) | Every time a PowerShell session starts, for example when powershell.exe is opened or a script is run. An EngineVersion of 2.0 can indicate a downgrade attack to avoid newer logging | 
+| 800 | PowerShell | Pipeline execution details | When a PowerShell command (pipeline) is executed, mainly when Module Logging is enabled |
+| 4103 | PowerShell | Module logging | When a command from a PowerShell module runs and Module Logging is enabled (via Group Policy) |
+| 4104 | PowerShell | Script block logging | When a block of PowerShell code runs and Script Block Logging is enabled. In PowerShell 5 and later, code that looks suspicious is logged automatically even when it is not enabled |
+| 1100 | Security | Event logging service shut down | When the Event Log service stops. This is normal during a system shutdown; at any other time it may mean someone stopped logging on purpose |
+| 1101 | Security | Audit events dropped | When security events could not be recorded, for example when too many events arrived at once and the queue overflowed. Some activity is missing from the log |
+| 1102 | Security | Security log was cleared | When the Security log is cleared, via the Clear Log button in Event Viewer or with wevtutil cl Security |
+| 4608 | Security | Windows is starting up | During system boot |
+| 4624 | Security | A user account successfully logged in | On every successful logon, whether local, over the network, via RDP, by unlocking the computer, or by a service. The Logon Type field shows which |
+| 4625 | Security | A user account failed to log in | On every failed logon, for example a wrong password, a username that does not exist, or a disabled account. Many in a short time can indicate brute force |
+| 4634 | Security | A user account successfully logged off | When a logon session ends. It shares the same Logon ID as the matching **4624** |
+| 4688 | Security | A new process was created | Every time a new process starts, when Audit Process Creation is enabled |
+| 4719 | Security | Audit policy was changed | When the audit policy is changed, for example with auditpol or in secpol.msc. An attacker may do this to stop certain events from being logged |
+| 4720 | Security | A user account was created | When a new user account is created, for example with net user <name> <password> /add or in Local Users and Groups |
+| 4722 | Security | A user account was enabled | When a disabled account is enabled. It also appears right after **4720** when a new account is created |
+| 4724 | Security | Attempt to reset an account's password | When someone sets a new password for another account without knowing the old one. It also appears right after **4720** when an account is created with a password |
+| 4725 | Security | A user account was disabled | When an account is disabled, so it can no longer log on, but it still exists |
+| 4726 | Security |A user account was deleted | When an account is deleted completely |
+| 4738 | Security | A user account was changed | When account properties change, for example "password never expires" or the account expiry date. It also appears right after **4720** when an account is created |
+| 4798 | Security | A user's local group membership was enumerated | When a process lists which local groups a user belongs to, for example with net user <name> or by opening the user in Local Users and Groups |
+| 4799 | Security | A local group membership was enumerated | When a process lists the members of a local group, for example with net localgroup administrators. System processes also trigger it regularly, so it is noisy |
+| 4672 | Security | Special privileges assigned to new logon | Immediately following event **4624**, when an account with such privileges connects. In practice, this is typically an Administrator account or a system account, such as SYSTEM |
+| 4800 | Security | The computer was locked | When the user locks the computer, either via Win + L or through an automatic lock after a period of inactivity |
+| 4801 | Security | The computer has been unlocked | When the user returns and enters a password to unlock |
+| 6005 | System | Event log service started | at every system boot, when the Event Log service starts, so it marks a startup |
+| 6008 | System | previous shutdown was unexpected | at boot, when the previous shutdown was not clean, for example a power cut, a crash or holding the power button |
+| 7045 | System | A new service was installed | When a new service is installed, for example with sc create, by a software installer, or by tools such as PsExec. A common sign of persistence |
 
 ---
 
@@ -516,32 +596,6 @@ smss.exe
 
 ---
 
-## Key Event IDs
-| Event ID | Log | Meaning |
-|---|---|---|
-| 104 | System | A log was cleared |
-| 400 | Windows PowerShell | PowerShell engine started (check EngineVersion) |
-| 800 | Windows PowerShell | Pipeline execution details |
-| 1100 | Security | Event logging service shut down |
-| 1101 | Security | Audit events dropped |
-| 1102 | Security | Security log was cleared |
-| 4103 | PowerShell/Operational | Module logging – command executed |
-| 4104 | PowerShell/Operational | Script block logging – full code |
-| 4608 | Security | Windows is starting up |
-| 4624 / 4625 | Security | Successful / failed logon |
-| 4688 | Security | A new process was created |
-| 4719 | Security | Audit policy was changed |
-| 4720 | Security | A user account was created |
-| 4724 | Security | Attempt to reset an account's password |
-| 4738 | Security | A user account was changed |
-| 4798 | Security | A user's local group membership was enumerated |
-| 4799 | Security | A local group membership was enumerated |
-| 6005 / 6008 | System | Event log service started / previous shutdown was unexpected |
-| 7045 | System | A new service was installed |
-| 2004–2006, 2033 | Firewall | Firewall rule added / changed / deleted |
-
----
-
 ## Lessons Learned
 - **Check the data source first.** `merged.evtx` combines many logs, so a question about PowerShell/Operational must be filtered to that provider
 - **The room was updated, but some answers were not.** When the data does not match the question, go back to the context of the task
@@ -557,7 +611,10 @@ smss.exe
 
 ## Key Takeaways
 - Event logs are a core data source for detection and investigation
-- Event Viewer is good for exploring; wevtutil and Get-WinEvent are good for automation and large datasets
+- Windows separates its logs into categories, and the **Security** log is the most important one for investigations
+- Event Viewer provides a graphical way to view, sort and filter logs
+- wevtutil and Get-WinEvent are good for automation and large datasets
+- Account creation, enabling and password reset in a short period of time can indicate an attacker setting up **persistence**
 - FilterHashtable and XPath filter events efficiently while retrieving them
 - Important logging (PowerShell, process command lines) must be **enabled** – visibility gaps are what attackers exploit
 - Attackers try to blind defenders by clearing logs, disabling logging, or downgrading PowerShell – and each of these leaves its own evidence
